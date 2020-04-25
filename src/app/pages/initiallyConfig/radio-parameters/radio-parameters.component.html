@@ -1,0 +1,149 @@
+<div class="card mb-4">
+    <div class="card-header"><i class="fas fa-table mr-1"></i>Table 2: Radio parameters</div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Acciones</th>
+                        <th>CELL</th>
+                        <th>TX/RX Mode</th>
+                        <th>PCI</th>
+                        <th>Donwlink - EARFCN</th>
+                      <!-- <th>Example 0</th>
+                        <th>Example 1</th>--> 
+                        
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let item of radioParametersObject ; let i=index">
+                         <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <!-- Button trigger modal  -->
+                                
+                                <button type="button" class="btn btn-primary"
+                                    (click)="openScrollableContent(radioParameterContent)"
+                                    (click)="editarRadioParameter(item.id)">
+                                    Editar
+                                </button>
+                                <!-- Button trigger modal -->
+                                <button (click)="borrarRadioParameters(item.id)" type="button" class="btn btn-danger btn-sm">
+                                    Eliminar
+                                </button>
+
+                                <button type="button" class="btn btn-primary"
+                                
+                                    (click)="duplicarRadioParameters(item.id)">
+                                    Duplicar
+                                </button>
+                            </div>
+
+                        </td>
+                        
+                        <td>{{item.cell}}</td>
+                        <td>{{item.tx_rx_mode}}</td>
+                        
+                        <td>{{item.pci}}</td>
+                        <td>{{item.downlinkEarfcn}}</td>
+                        <!--<td>{{item.example[0]}}</td>
+                        <td>{{item.example[1]}}</td>-->
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <!-- Button trigger modal -->
+        <button *ngIf="radioParametersObject.length < 4" type="button" class="btn btn-primary"
+            (click)="openScrollableContent(radioParameterContent)">
+            Agregar
+        </button>
+
+    </div>
+</div>
+
+<ng-template #radioParameterContent let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="radioParameterContent">Radio Paramaters</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-body">
+            <form [formGroup]="radioParametersForm">
+                <div class="form-group">
+                    <label for="cell" class="col-form-label">CELL Name:</label>
+                    <input formControlName="cell" type="text" class="form-control" id="cell"
+                        [class.is-invalid]="cellInvalid">
+                    <small *ngIf="cellInvalid" class="text-danger">
+                        Ingrese cell name
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="tx_rx_mode" class="col-form-label">TX/RX Mode:</label>
+                    <input formControlName="tx_rx_mode" class="form-control" id="tx_rx_mode"
+                        [class.is-invalid]="tx_rx_modeInvalid">
+                    <small *ngIf="tx_rx_modeInvalid" class="text-danger">
+                        Ingrese TX/RX Mode
+                    </small>
+                </div>
+                
+                
+                <div class="form-group">
+                    <label for="pci" class="col-form-label">PCI:</label>
+                    <input formControlName="pci" class="form-control" id="pci"
+                        [class.is-invalid]="pciInvalid">
+                    <small *ngIf="pciInvalid" class="text-danger">
+                        Ingrese PCI
+                    </small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="downlinkEarfcn" class="col-form-label">Donwlink - EARFCN:</label>
+                    <input formControlName="downlinkEarfcn" class="form-control" id="downlinkEarfcn"
+                        [class.is-invalid]="downlinkEarfcnInvalid">
+                    <small *ngIf="downlinkEarfcnInvalid" class="text-danger">
+                        Ingrese Donwlink - EARFCN
+                    </small>
+                </div>
+<!--
+                <div class="form-group" 
+                    formArrayName="example" 
+                    *ngFor="let control of examples.controls; let i=index">
+
+                    <label  class="col-form-label">Example {{i}}:</label>
+                    <div class="row">            
+                        <div class="col">
+                            <input [formControlName]="i" class="form-control"
+                            [class.is-invalid]="exampleInvalid">
+                            <small *ngIf="exampleInvalid" class="text-danger">
+                                Example Vacio
+                            </small>
+                        </div>
+                        <div class="col-md-auto">
+                            <div class="btn-group" role="group" aria-label="Basic example" >
+                                <button class="btn btn-primary  " type="button" (click)="agregarExample()" *ngIf=" i < 1">
+                                    + 
+                                </button>
+                                <button class="btn btn-danger  " type="button" (click)="borrarExample(i)" *ngIf="i > 0">
+                                    -
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+ -->               
+
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="reset" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+        <button type="button" (click)="guardarRadioParameters()" class="btn btn-success mr-2"
+            (click)="modal.close('Close click')" [disabled]="radioParametersForm.invalid">
+            <i class="fa fa-save"></i>
+            Guardar
+        </button>
+    </div>
+</ng-template>

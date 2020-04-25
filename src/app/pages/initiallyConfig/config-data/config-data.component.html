@@ -1,0 +1,157 @@
+<div class="card mb-4">
+    <div class="card-header"><i class="fas fa-table mr-1"></i>Table 1: EnodeB Configuration Data </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Acciones</th>
+                        <th>NE</th>
+                        <th>Ethernet Port Number</th>
+                        <th>Interface IP address</th>
+                        <th>Mask</th>
+                        <th>Nexthoop IP Address (M2000 | SGW | MME)</th>
+                        <th>Nexthoop VLAN Address (M2000 | SGW | MME)</th>
+                    </tr>
+                </thead>
+                <!-- <tfoot>
+                    <tr>
+                        <th>NE</th>
+                        <th>Ethernet Port NUmber</th>
+                        <th>Interface IP address</th>
+                        <th>Mask</th>
+                        <th>Nexthoop IP Address (M2000 | SGW | MME)</th>
+                        <th>Nexthoop VLAN Address (M2000 | SGW | MME)</th>
+                    </tr>
+                </tfoot>-->
+                <tbody>
+                    <tr *ngIf="configDataObject">
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <!-- Button trigger modal 
+                                <button (click)="editarConfigData()" type="button" class="btn btn-success btn-sm"
+                                    data-toggle="modal" data-target="#configDataModal">-->
+                                <button type="button" class="btn btn-primary"
+                                    (click)="openScrollableContent(longContent)" (click)="editarConfigData()">
+                                    Editar
+                                </button>
+                                <!-- Button trigger modal -->
+                                <button (click)="eliminarConfigData()" type="button" class="btn btn-danger btn-sm">
+                                    Eliminar
+                                </button>
+                            </div>
+
+                        </td>
+                        <td>{{configDataObject.ne}}</td>
+                        <td>{{configDataObject.ethernetPortNumber}}</td>
+                        <td>{{configDataObject.interfazIp}}</td>
+                        <td>{{configDataObject.maskIp}}</td>
+                        <td>{{configDataObject.nextHopIp}}</td>
+                        <td>{{configDataObject.nextHopVlan}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <!-- Button trigger modal 
+        <button *ngIf="!configDataObject" type="button" class="btn btn-primary" data-toggle="modal"
+            data-target="#configDataModal">-->
+        <button *ngIf="!configDataObject" type="button" class="btn btn-primary"
+            (click)="openScrollableContent(longContent)">
+            Agregar
+        </button>
+
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<!--<div class="modal fade" id="configDataModal" tabindex="-1" role="dialog" aria-labelledby="configDataModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content"> -->
+<ng-template #longContent let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="configDataModal">EnodeB Configuration Data</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-body">
+            <form [formGroup]="configDataForm">
+                <div class="form-group">
+                    <label for="ne" class="col-form-label">NE:</label>
+                    <input formControlName="ne" type="text" class="form-control" id="ne-name"
+                        [class.is-invalid]="neInvalid">
+                    <small *ngIf="neInvalid" class="text-danger">
+                        Ingrese nombre del NE
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="ethernetPortNumber" class="col-form-label">Ethernet Port Number:</label>
+                    <input formControlName="ethernetPortNumber" type="number" class="form-control"
+                        id="ethernetPortNumber" [class.is-invalid]="ethernetPortNumberInvalid">
+                    <small *ngIf="ethernetPortNumberInvalid" class="text-danger">
+                        Ingrese Port Number
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="interfazIp" class="col-form-label">Interface IP address:</label>
+                    <input formControlName="interfazIp" type="text" class="form-control" id="interfazIp"
+                        [class.is-invalid]="interfazIpInvalid">
+
+                    <small *ngIf="interfazIpInvalid" class="text-danger">
+                        Ingrese IP valida
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="maskIp" class="col-form-label">Mask:</label>
+                    <input formControlName="maskIp" type="text" class="form-control" id="maskIp"
+                        [class.is-invalid]="maskIpInvalid">
+                    <small *ngIf="maskIpInvalid" class="text-danger">
+                        Ingrese IP valida
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="nextHopIp" class="col-form-label">Nexthoop IP Address (M2000 | SGW |
+                        MME):</label>
+                    <input formControlName="nextHopIp" type="text" class="form-control" id="nextHopIp"
+                        [class.is-invalid]="nextHopIpInvalid">
+                    <small *ngIf="nextHopIpInvalid" class="text-danger">
+                        Ingrese IP valida
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="nextHopVlan" class="col-form-label">Nexthoop VLAN Address (M2000 | SGW |
+                        MME):</label>
+                    <input formControlName="nextHopVlan" class="form-control" id="nextHopVlan"
+                        [class.is-invalid]="nextHopVlanInvalid">
+                    <small *ngIf="nextHopVlanInvalid" class="text-danger">
+                        Ingrese IP valida
+                    </small>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="reset" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+        <button type="button" (click)="guardarConfigData()" class="btn btn-success mr-2"
+            (click)="modal.close('Close click')" [disabled]="configDataForm.invalid" *ngIf="!cargando">
+            <i class="fa fa-save"></i>
+            Guardar
+        </button>
+        <!--<button type="submit"
+                            class="btn btn-primary submit-btn btn-block"
+                            [disabled]="true"
+                            *ngIf="cargando">
+                      <i class="fa fa-spin fa-sync"></i>
+                      Espere por favor...    
+                </button>-->
+    </div>
+</ng-template>
+<!--       </div>
+    </div>
+</div>-->

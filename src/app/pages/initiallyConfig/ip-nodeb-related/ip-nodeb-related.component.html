@@ -1,0 +1,206 @@
+<div class="card mb-4">
+    <div class="card-header"><i class="fas fa-table mr-1"></i>Table 1: EnodeB Configuration Data </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Acciones</th>
+                        <th>M2000 IP Address</th>
+                        <th>S-GW Name Id</th>
+                        <th>S-GW IP address 1</th>
+                        <th>S-GW IP address 2</th>
+                        <th>S-GW IP address 3</th>
+                        <th>S-GW IP address 4 </th>
+                        <th>MME Name</th>
+                        <th>MME IP address (First)</th>
+                        <th>MME IP address (Second)</th>
+                        <th>IPv4 Address of the IP clock Server</th>
+                        <th>Next-Hop IP Address - IP clock Server</th>
+                        <th>Next-Hop VLAN Address - IP clock Server</th>
+                    </tr>
+                </thead>
+                <!-- <tfoot>
+                    <tr>
+                        <th>NE</th>
+                        <th>Ethernet Port NUmber</th>
+                        <th>Interface IP address</th>
+                        <th>Mask</th>
+                        <th>Nexthoop IP Address (M2000 | SGW | MME)</th>
+                        <th>Nexthoop VLAN Address (M2000 | SGW | MME)</th>
+                    </tr>
+                </tfoot>-->
+                <tbody>
+                    <tr *ngIf="ipNodebRelated">
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <!-- Button trigger modal 
+                                <button (click)="editarConfigData()" type="button" class="btn btn-success btn-sm"
+                                    data-toggle="modal" data-target="#configDataModal">-->
+                                <button type="button" class="btn btn-primary"
+                                    (click)="openScrollableContent(ipNodebRelatedContent)"
+                                    (click)="editarIpNodebRelated()">
+                                    Editar
+                                </button>
+                                <!-- Button trigger modal -->
+                                <button (click)="eliminarIpNodebRelated()" type="button" class="btn btn-danger btn-sm">
+                                    Eliminar
+                                </button>
+                            </div>
+
+                        </td>
+                        <td>{{ipNodebRelated.m2000IpAddr}}</td>
+                        <td>{{ipNodebRelated.sgwNameId}}</td>
+                        
+                        <td>{{ipNodebRelated.sgwIp[0]}}</td>
+                        <td>{{ipNodebRelated.sgwIp[1]}}</td>
+                        <td>{{ipNodebRelated.sgwIp[2]}}</td>
+                        <td>{{ipNodebRelated.sgwIp[3]}}</td>
+                        
+                        <td>{{ipNodebRelated.mmeName}}</td>
+                        
+                        <td>{{ipNodebRelated.mmeIp[0]}}</td>
+                        <td>{{ipNodebRelated.mmeIp[1]}}</td>
+
+                        <td>{{ipNodebRelated.ipClockServer}}</td>
+                        <td>{{ipNodebRelated.nextHoopClockServer}}</td>
+                        <td>{{ipNodebRelated.nextHoopVlanClockServer}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <!-- Button trigger modal -->
+        <button *ngIf="!ipNodebRelated" type="button" class="btn btn-primary"
+            (click)="openScrollableContent(ipNodebRelatedContent)">
+            Agregar
+        </button>
+
+    </div>
+</div>
+
+<ng-template #ipNodebRelatedContent let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="ipNodebRelatedContent">IP Address of eNodeB-related NEs</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-body">
+            <form [formGroup]="ipNodebRelatedForm">
+                <div class="form-group">
+                    <label for="m2000IpAddr" class="col-form-label">M2000 IP Address:</label>
+                    <input formControlName="m2000IpAddr" type="text" class="form-control" id="m2000IpAddr"
+                        [class.is-invalid]="m2000IpAddrInvalid">
+                    <small *ngIf="m2000IpAddrInvalid" class="text-danger">
+                        Ingrese IP valida
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="sgwNameId" class="col-form-label">S-GW Name:</label>
+                    <input formControlName="sgwNameId" class="form-control" id="sgwNameId"
+                        [class.is-invalid]="sgwNameIdInvalid">
+                    <small *ngIf="sgwNameIdInvalid" class="text-danger">
+                        Ingrese S-GW Name
+                    </small>
+                </div>
+                <div class="form-group" 
+                    formArrayName="sgwIp" 
+                    *ngFor="let control of sgwIps.controls; let i=index">
+
+                    <label  class="col-form-label">S-GW IP Address {{i+1}}:</label>
+                    <div class="row">            
+                        <div class="col">
+                            <input [formControlName]="i" class="form-control"
+                            [class.is-invalid]="sgwIpInvalid">
+                            <small *ngIf="sgwIpInvalid" class="text-danger">
+                                IP invalida
+                            </small>
+                        </div>
+                        <div class="col-md-auto">
+                            <div class="btn-group" role="group" aria-label="Basic example" >
+                                <button class="btn btn-primary  " type="button" (click)="agregarSgwIp()" *ngIf=" i < 3">
+                                    + 
+                                </button>
+                                <button class="btn btn-danger  " type="button" (click)="borrarSgwIp(i)" *ngIf="i > 0">
+                                    -
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mmeName" class="col-form-label">MME Name:</label>
+                    <input formControlName="mmeName" class="form-control" id="mmeNameId"
+                        [class.is-invalid]="mmeNameInvalid">
+                    <small *ngIf="mmeNameInvalid" class="text-danger">
+                        Ingrese MME Name
+                    </small>
+                </div>
+
+                <div class="form-group" 
+                    formArrayName="mmeIp" 
+                    *ngFor="let control of mmeIps.controls; let i=index">
+
+                    <label  class="col-form-label">MME IP Address {{i+1}}:</label>
+                    <div class="row">            
+                        <div class="col">
+                            <input [formControlName]="i" class="form-control"
+                            [class.is-invalid]="mmeIpInvalid">
+                            <small *ngIf="mmeIpInvalid" class="text-danger">
+                                IP invalida
+                            </small>
+                        </div>
+                        <div class="col-md-auto">
+                            <div class="btn-group" role="group" aria-label="Basic example" >
+                                <button class="btn btn-primary  " type="button" (click)="agregarMmeIp()" *ngIf=" i < 1">
+                                    + 
+                                </button>
+                                <button class="btn btn-danger  " type="button" (click)="borrarMmeIp(i)" *ngIf="i > 0">
+                                    -
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="ipClockServer" class="col-form-label">IP clock server IP Address:</label>
+                    <input formControlName="ipClockServer" type="text" class="form-control" id="ipClockServer"
+                        [class.is-invalid]="ipClockServerInvalid">
+                    <small *ngIf="ipClockServerInvalid" class="text-danger">
+                        Ingrese IP valida
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label for="nextHoopClockServer" class="col-form-label">IP NextHoop clock server IP Address:</label>
+                    <input formControlName="nextHoopClockServer" type="text" class="form-control" id="nextHoopClockServer"
+                        [class.is-invalid]="nextHoopClockServerInvalid">
+                    <small *ngIf="nextHoopClockServerInvalid" class="text-danger">
+                        Ingrese IP valida
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label for="nextHoopVlanClockServer" class="col-form-label">IP NextHoop VLAN clock server IP Address:</label>
+                    <input formControlName="nextHoopVlanClockServer" type="text" class="form-control" id="nextHoopVlanClockServer"
+                        [class.is-invalid]="nextHoopVlanClockServerInvalid">
+                    <small *ngIf="nextHoopVlanClockServerInvalid" class="text-danger">
+                        Ingrese IP valida
+                    </small>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="reset" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+        <button type="button" (click)="guardarIpNodebRelated()" class="btn btn-success mr-2"
+            (click)="modal.close('Close click')" [disabled]="ipNodebRelatedForm.invalid">
+            <i class="fa fa-save"></i>
+            Guardar
+        </button>
+    </div>
+</ng-template>
