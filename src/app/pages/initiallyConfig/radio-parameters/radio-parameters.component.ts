@@ -43,19 +43,24 @@ export class RadioParametersComponent implements OnInit, OnDestroy {
       //example: this.fb.array([])*/
     });
     //this.agregarExample();
-    this.radioParametersObject = this.radioParameterService.cargarRadioParameters();
-    //if(this.radioParametersObject.length > 0){
-      this.radioParametersObject.forEach((radioParameter) =>{
-        this.store.dispatch(
-          radioParametersAction.crearRadioParameters({
-            radioParameter
-          }));
-      })
-   //}
+    
     this.radioParametersSubscription = this.store.select('radioParameters').subscribe(obj => {
           this.radioParametersObject = obj as RadioParameters[];
     }
     );
+    //if(!this.radioParametersObject){
+      this.radioParametersObject = this.radioParameterService.cargarRadioParameters();
+      this.store.dispatch(
+        radioParametersAction.cargarRadioParameters({
+          radioParameters:this.radioParametersObject
+        }));
+     /* this.radioParametersObject.forEach((radioParameter) =>{
+          this.store.dispatch(
+            radioParametersAction.crearRadioParameters({
+              radioParameter
+            }));
+        })
+      }*/
   }
 
   ngOnDestroy(): void {

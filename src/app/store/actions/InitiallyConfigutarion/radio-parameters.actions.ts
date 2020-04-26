@@ -7,7 +7,8 @@ export const crearRadioParameters = createAction(
 );
 
 export const cargarRadioParameters= createAction(
-    '[RadioParameters Component] Cargar Radio Parameter'
+    '[RadioParameters Component] Cargar Radio Parameter',
+    props<{radioParameters: RadioParameters[]}>()
 );
 
 export const editarRadioParameters= createAction(

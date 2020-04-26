@@ -93,7 +93,8 @@
                 <div class="form-group">
                     <label for="pci" class="col-form-label">PCI:</label>
                     <input formControlName="pci" class="form-control" id="pci"
-                        [class.is-invalid]="pciInvalid">
+                        [class.is-invalid]="pciInvalid"
+                        type="number">
                     <small *ngIf="pciInvalid" class="text-danger">
                         Ingrese PCI
                     </small>

@@ -11,6 +11,7 @@ import { ConfigDataComponent } from './initiallyConfig/config-data/config-data.c
 import { IpNodebRelatedComponent } from './initiallyConfig/ip-nodeb-related/ip-nodeb-related.component';
 import { RadioParametersComponent } from './initiallyConfig/radio-parameters/radio-parameters.component';
 import { PagesComponent } from './pages.component';
+import { DhcpswComponent } from './removeDefaultConfigData/dhcpsw.component';
 
 
 
@@ -20,7 +21,8 @@ import { PagesComponent } from './pages.component';
     ConfigDataComponent, 
     IpNodebRelatedComponent, 
     RadioParametersComponent, 
-    PagesComponent],
+    PagesComponent,
+    DhcpswComponent],
   imports: [
     CommonModule,
     AppRoutingModule,
@@ -29,7 +31,8 @@ import { PagesComponent } from './pages.component';
   ],
   exports:[
     PagesComponent,
-    InitConfigComponent
+    InitConfigComponent,
+    DhcpswComponent
   ]
 })
 export class PagesModule { }

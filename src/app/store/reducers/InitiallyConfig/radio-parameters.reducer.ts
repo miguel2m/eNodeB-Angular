@@ -13,7 +13,9 @@ const _radioParametersReducer = createReducer(radioParametersInitialState,
 
     on(radioParametersActions.crearRadioParameters, (state,{radioParameter}) =>  
          [...state,radioParameter]),
-         
+    on(radioParametersActions.cargarRadioParameters, (state,{radioParameters}) =>  
+        radioParameters),
+          
     on(radioParametersActions.cargarRadioParameters, (state) => {
         return state.map( radioParameter =>{
             return{

@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { InitConfigComponent } from './pages/initiallyConfig/init-config.component';
 import { pagesRoutes } from './pages/pages.routes';
+import { PagesComponent } from './pages/pages.component';
 
 
 const routes: Routes = [
   {
     path: '', 
-    component: InitConfigComponent,
+    component: PagesComponent,
     children: pagesRoutes
     
   },
