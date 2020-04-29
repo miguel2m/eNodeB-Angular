@@ -1,1 +1,123 @@
-<p>dhcpsw works!</p>
+<h1 class="mt-4 text-center">Remove Default Configuration Data</h1>
+
+<div class="card mb-4">
+    <div class="card-header"><i class="fas fa-table mr-1"></i>Table 1: EnodeB Configuration Data </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Acciones</th>
+                        <th>Reference ID</th>
+                        <th>SWITCH</th>
+                        <th>VLANSCANSW</th>
+                    </tr>
+                </thead>
+                <!-- <tfoot>
+                    <tr>
+                        <th>NE</th>
+                        <th>Ethernet Port NUmber</th>
+                        <th>Interface IP address</th>
+                        <th>Mask</th>
+                        <th>Nexthoop IP Address (M2000 | SGW | MME)</th>
+                        <th>Nexthoop VLAN Address (M2000 | SGW | MME)</th>
+                    </tr>
+                </tfoot>-->
+                <tbody>
+                    <tr *ngIf="dchpswObject">
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <!-- Button trigger modal 
+                                <button (click)="editarConfigData()" type="button" class="btn btn-success btn-sm"
+                                    data-toggle="modal" data-target="#configDataModal">-->
+                                <button type="button" class="btn btn-primary"
+                                    (click)="openScrollableContent(longContent)" (click)="editarDchpsw()">
+                                    Editar
+                                </button>
+                                <!-- Button trigger modal -->
+                                <button (click)="eliminarDchpsw()" type="button" class="btn btn-danger btn-sm">
+                                    Eliminar
+                                </button>
+                            </div>
+
+                        </td>
+                        <td>{{dchpswObject.parameterId}}</td>
+                        <td>{{dchpswObject.switchDchpsw}}</td>
+                        <td>{{dchpswObject.vlanScansw}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <!-- Button trigger modal 
+        <button *ngIf="!configDataObject" type="button" class="btn btn-primary" data-toggle="modal"
+            data-target="#configDataModal">-->
+        <button *ngIf="!dchpswObject" type="button" class="btn btn-primary"
+            (click)="openScrollableContent(longContent)">
+            Agregar
+        </button>
+        <p *ngIf="dchpswObject" class="text-center"> <strong>{{dchpswObject.Command}}</strong></p>
+            
+
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<!--<div class="modal fade" id="configDataModal" tabindex="-1" role="dialog" aria-labelledby="configDataModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content"> -->
+<ng-template #longContent let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="configDataModal">Remove Default Configuration</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-body">
+            <form [formGroup]="dhcpswForm">
+                <div class="form-group">
+                    <label for="parameterId" class="col-form-label">Parameter ID:</label>
+                   
+                    <select formControlName="parameterId" class="form-control">
+                        <option *ngFor="let item of parametersId" [value]="item">{{item}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="switchDhcp" class="col-form-label">SWITCH</label>
+                    <input formControlName="switchDhcp" class="form-control"
+                        id="switchDhcp">
+                    
+                </div>
+                <div class="form-group">
+                    <label for="vlanScan" class="col-form-label">VLANSCANSW</label>
+                    <input formControlName="vlanScan" class="form-control"
+                        id="vlanScan">
+                    
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="reset" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+        <button type="button" (click)="guardarDchpsw()" class="btn btn-success mr-2"
+            (click)="modal.close('Close click')" >
+            <i class="fa fa-save"></i>
+            Guardar
+        </button>
+        <!--<button type="submit"
+                            class="btn btn-primary submit-btn btn-block"
+                            [disabled]="true"
+                            *ngIf="cargando">
+                      <i class="fa fa-spin fa-sync"></i>
+                      Espere por favor...    
+                </button>-->
+    </div>
+</ng-template>
+<!--       </div>
+    </div>
+</div>-->

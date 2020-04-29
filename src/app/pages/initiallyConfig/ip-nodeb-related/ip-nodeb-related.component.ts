@@ -58,7 +58,7 @@ export class IpNodebRelatedComponent implements OnInit,OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.ipNodebRelatedSubscription?.unsubscribe();
+    //this.ipNodebRelatedSubscription?.unsubscribe();
   }
 
   openScrollableContent(longContent) {

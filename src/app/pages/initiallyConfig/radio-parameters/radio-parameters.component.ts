@@ -64,7 +64,7 @@ export class RadioParametersComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.radioParametersSubscription?.unsubscribe();
+    //this.radioParametersSubscription?.unsubscribe();
   }
 
   openScrollableContent(longContent) {

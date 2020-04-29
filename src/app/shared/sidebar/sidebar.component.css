@@ -1,0 +1,19 @@
+/*Clase sideBar co text area*/
+.sb-sidenav .sb-sidenav-menu .form-control  {
+    overflow-y: auto;
+    flex-grow: 1;
+
+    resize: none;
+
+    border-radius: 4px;
+  
+    vertical-align: baseline;
+    
+  
+  }
+  .sb-sidenav  .list-container {
+    /*height: 392px;*/
+    height: 100%;
+    
+  
+  }

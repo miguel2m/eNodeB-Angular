@@ -60,7 +60,7 @@ export class ConfigDataComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.configDataSubscription?.unsubscribe();
+    //this.configDataSubscription?.unsubscribe();
   }
 
   get neInvalid() {
