@@ -12,6 +12,7 @@ import { IpNodebRelatedComponent } from './initiallyConfig/ip-nodeb-related/ip-n
 import { RadioParametersComponent } from './initiallyConfig/radio-parameters/radio-parameters.component';
 import { PagesComponent } from './pages.component';
 import { DhcpswComponent } from './removeDefaultConfigData/dhcpsw.component';
+import { ConfigBasicDataComponent } from './configuringBasicData/config-basic-data.component';
 
 
 
@@ -22,7 +23,8 @@ import { DhcpswComponent } from './removeDefaultConfigData/dhcpsw.component';
     IpNodebRelatedComponent, 
     RadioParametersComponent, 
     PagesComponent,
-    DhcpswComponent],
+    DhcpswComponent,
+    ConfigBasicDataComponent],
   imports: [
     CommonModule,
     AppRoutingModule,
@@ -32,7 +34,8 @@ import { DhcpswComponent } from './removeDefaultConfigData/dhcpsw.component';
   exports:[
     PagesComponent,
     InitConfigComponent,
-    DhcpswComponent
+    DhcpswComponent,
+    ConfigBasicDataComponent
   ]
 })
 export class PagesModule { }

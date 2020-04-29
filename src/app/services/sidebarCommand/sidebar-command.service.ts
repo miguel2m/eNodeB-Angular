@@ -36,7 +36,14 @@ export class SidebarCommandService {
               {id: 14,command: '//RMV RRUCHAIN'},
               {id: 15,command: '//RMV BRD'},
               {id: 16  ,command: '//Configuring Basic Data'},
-              {id: 17  ,command: '//'}
+              {id: 17  ,command: '//Node configuration attributes'},
+              {id: 18  ,command: '//List Node Configuration (LST NODE) and complete'},
+              {id: 19  ,command: 'LST NODE:;'},
+              {id: 20  ,command: '//NE configuration attributes'},
+              {id: 21  ,command: '//Set Network Element Configuration (SET NE)'},
+              {id: 22  ,command: 'LST NE:;'},
+              {id: 23  ,command: '//MML Command'},
+              {id: 24  ,command: '//'},
             ]    
     
   }

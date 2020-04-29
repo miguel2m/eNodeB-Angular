@@ -32,7 +32,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.sidebarCommandsSubscription =this.store.select('sidebarCommand').subscribe(obj => {
       
       this.items = obj as SidebarCommand[];
-      
+      //this.sidebarCommandService.guardarSidebarCommand(this.items );
     });
     
   }
@@ -53,7 +53,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     Swal.fire({
       position: 'top-end',
       icon: 'success',
-      title: 'Texto Copiado',
+      title: 'Comandos Copiados',
       showConfirmButton: false,
       timer: 1500
     });
