@@ -7,7 +7,7 @@ export interface AppState {
    configData     : reducers.ConfigDataState ,
    ipNodeRelated  : reducers.IpNodeRelatedState,
    radioParameters: RadioParameters[],
-   dhcpws         : reducers.RemoveDefaultConfigState,
+   //dhcpws         : reducers.RemoveDefaultConfigState,
    sidebarCommand : SidebarCommand[]
 }
 
@@ -17,6 +17,6 @@ export const appReducers: ActionReducerMap<AppState> = {
     configData     : reducers.configDataReducer ,
     ipNodeRelated  : reducers.ipNodeRelatedReducer ,
     radioParameters: reducers.radioParametersReducer,
-    dhcpws         : reducers.dhcpswReducer,
+    //dhcpws         : reducers.dhcpswReducer,
     sidebarCommand : reducers.sidebarCommandReducer
 }

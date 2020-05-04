@@ -7,6 +7,9 @@ export const pagesRoutes: Routes =[
     
     {path :'', component: InitConfigComponent},
     {path :'dhcpsw', component: DhcpswComponent},
-    {path :'configuringBasicData', component: ConfigBasicDataComponent},
+    {
+        path :'configuringBasicData',
+        component: ConfigBasicDataComponent
+    },
     {path: '**', redirectTo:''}
 ];

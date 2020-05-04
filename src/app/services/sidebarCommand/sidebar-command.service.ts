@@ -44,6 +44,18 @@ export class SidebarCommandService {
               {id: 22  ,command: 'LST NE:;'},
               {id: 23  ,command: '//MML Command'},
               {id: 24  ,command: '//'},
+              {id: 25  ,command: '//Set Node Configuration (SET NODE)'},
+              {id: 26  ,command: 'LST NODE:;'},
+              {id: 27  ,command: '//MML Command'},
+              {id: 28  ,command: '//'},
+              {id: 29  ,command: '//Location information'},
+              {id: 30  ,command: '//Add Location (ADD LOCATION)'},
+              {id: 31  ,command: 'LST LOCATION:;'},
+              {id: 32  ,command: '//MML Command'},
+              {id: 33  ,command: '//'},
+              {id: 34  ,command: '//'},
+              {id: 35  ,command: '//'},
+              {id: 36  ,command: '//eNodeB function'},
             ]    
     
   }

@@ -6,13 +6,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 //MODAL
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
+//Modules
+import { ConfigurinBasicDataModule } from './configuringBasicData/configurin-basic-data.module';
+
 import { InitConfigComponent } from './initiallyConfig/init-config.component';
 import { ConfigDataComponent } from './initiallyConfig/config-data/config-data.component';
 import { IpNodebRelatedComponent } from './initiallyConfig/ip-nodeb-related/ip-nodeb-related.component';
 import { RadioParametersComponent } from './initiallyConfig/radio-parameters/radio-parameters.component';
 import { PagesComponent } from './pages.component';
 import { DhcpswComponent } from './removeDefaultConfigData/dhcpsw.component';
-import { ConfigBasicDataComponent } from './configuringBasicData/config-basic-data.component';
+
 
 
 
@@ -24,18 +27,18 @@ import { ConfigBasicDataComponent } from './configuringBasicData/config-basic-da
     RadioParametersComponent, 
     PagesComponent,
     DhcpswComponent,
-    ConfigBasicDataComponent],
+    ],
   imports: [
     CommonModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    ConfigurinBasicDataModule
   ],
   exports:[
     PagesComponent,
     InitConfigComponent,
     DhcpswComponent,
-    ConfigBasicDataComponent
   ]
 })
 export class PagesModule { }

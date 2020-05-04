@@ -48,12 +48,7 @@ export class ConfigDataComponent implements OnInit, OnDestroy {
       nextHopVlan: ['', [Validators.required, Validators.pattern(this.ipPattern)]]
     });
 
-    this.configDataObject = this.configDataService.cargarConfigData();
-    if (this.configDataObject)
-      this.store.dispatch(
-        configDataActions.crearConfigData({
-          configData: this.configDataObject
-        }));
+    
     this.configDataSubscription=  this.store.select('configData').subscribe(obj => {
       this.configDataObject = obj.configDataObject;
     });

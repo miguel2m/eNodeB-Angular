@@ -1,0 +1,211 @@
+<div class="card mb-4">
+    <div class="card-header"><i class="fas fa-table mr-1"></i>Table 3: Location information</div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Acciones</th>
+                        <th>Parameter ID</th>
+                        <th>Location Name</th>
+                        <th>Geo-coordinate Data Format</th>
+                        <th>Latitude With Degree Format</th>
+                        <th>Longitude With Degree Format</th>
+                        <th>Latitude With Second Format</th>
+                        <th>Longitude With Second Format</th>
+                        <th>Location Id</th>
+                        <th>Altitude</th>
+                        <th>Range</th>
+                        <th>City</th>
+                        <th>Region</th>
+                        <th>Address</th>
+                        <th>Office</th>
+                        <th>Contact</th>
+                        <th>Telephone</th>
+                        <th>User Label</th>
+                        <th>Precise</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let item of locationInformationArray ; let i=index">
+                         <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                               
+                                <!-- Button trigger modal  -->
+                                
+                                <button type="button" class="btn btn-primary"
+                                    (click)="openScrollableContent(content)"
+                                    (click)="editarLocationInformation(item.id)">
+                                    Editar
+                                </button> 
+                                <!-- Button trigger modal -->
+                                <button (click)="borrarLocationInformation(item.id)" type="button" class="btn btn-danger btn-sm">
+                                    Eliminar
+                                </button>
+
+                                <button type="button" class="btn btn-primary"
+                                
+                                    (click)="duplicarLocationInformation(item.id)">
+                                    Duplicar
+                                </button> 
+                            </div>
+
+                        </td>
+                        
+                        <td>{{item.parameterId}}</td>
+                        <td>{{item.locationName}}</td>                       
+                        <td>{{item.gcdf}}</td>
+                        <td>{{item.latitudeGFormat}}</td>
+
+                        <td>{{item.longitudeGFormat}}</td>
+                        <td>{{item.latitudeSecFormat}}</td>                       
+                        <td>{{item.longitudeSecFormat}}</td>
+                        <td>{{item.locationId}}</td>
+
+                        <td>{{item.altitude}}</td>
+                        <td>{{item.range}}</td>                       
+                        <td>{{item.city}}</td>
+                        <td>{{item.region}}</td>
+
+                        <td>{{item.address}}</td>
+                        <td>{{item.office}}</td>                       
+                        <td>{{item.contact}}</td>
+                        <td>{{item.telephone}}</td>
+
+                        <td>{{item.userLabel}}</td>
+                        <td>{{item.precise}}</td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <br>
+        <!-- Button trigger modal -->
+        <button *ngIf="locationInformationArray.length < 3" type="button" class="btn btn-primary"
+            (click)="openScrollableContent(content)">
+            Agregar
+        </button>
+        <br>
+        <br>
+        <div *ngIf="locationInformationArray[0]" class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>MML Command</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let item of locationInformationArray">  
+                        <td>{{item.Command}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="content">Location information</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-body">
+            <form [formGroup]="locationInformationForm">
+                <div class="form-group">
+                    <label for="parameterId" class="col-form-label">Parameter ID:</label>
+
+                    <select formControlName="parameterId" class="form-control">
+                        <option *ngFor="let item of parametersId" [value]="item">{{item}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="locationName" class="col-form-label">Location Name</label>
+                    <input  formControlName="locationName" class="form-control" id="locationName">
+
+                </div>
+                <div class="form-group">
+                    <label for="gcdf" class="col-form-label">Geo-coordinate Data Format</label>
+                    <input  formControlName="gcdf" class="form-control" id="gcdf">
+
+                </div>
+                <div class="form-group">
+                    <label for="latitudeGFormat" class="col-form-label">Latitude With Degree Format</label>
+                    <input type="number"  formControlName="latitudeGFormat" class="form-control" id="latitudeGFormat">
+                </div>
+                <div class="form-group">
+                    <label for="longitudeGFormat" class="col-form-label">Longitude With Degree Format</label>
+                    <input type="number" formControlName="longitudeGFormat" class="form-control" id="longitudeGFormat">
+                </div>
+                <div class="form-group">
+                    <label for="latitudeSecFormat" class="col-form-label">Latitude With Second Format</label>
+                    <input type="number" formControlName="latitudeSecFormat" class="form-control" id="latitudeSecFormat">
+                </div>
+                <div class="form-group">
+                    <label for="longitudeSecFormat" class="col-form-label">Longitude With Second Format</label>
+                    <input type="number" formControlName="longitudeSecFormat" class="form-control" id="longitudeSecFormat">
+                </div>
+                <div class="form-group">
+                    <label for="locationId" class="col-form-label">Location Id</label>
+                    <input type="number"  formControlName="locationId" class="form-control" id="locationId">
+                </div>
+                <div class="form-group">
+                    <label for="altitude" class="col-form-label">Altitude</label>
+                    <input type="number" formControlName="altitude" class="form-control" id="altitude">
+                </div>
+                <div class="form-group">
+                    <label for="range" class="col-form-label">Range</label>
+                    <input type="number" formControlName="range" class="form-control" id="range">
+                </div>
+                <div class="form-group">
+                    <label for="city" class="col-form-label">City</label>
+                    <input  formControlName="city" class="form-control" id="city">
+                </div>
+                <div class="form-group">
+                    <label for="region" class="col-form-label">Region</label>
+                    <input  formControlName="region" class="form-control" id="region">
+                </div>
+                <div class="form-group">
+                    <label for="address" class="col-form-label">Address</label>
+                    <input  formControlName="address" class="form-control" id="address">
+                </div>
+                <div class="form-group">
+                    <label for="office" class="col-form-label">Office</label>
+                    <input  formControlName="office" class="form-control" id="office">
+                </div>
+                <div class="form-group">
+                    <label for="contact" class="col-form-label">Contact</label>
+                    <input  formControlName="contact" class="form-control" id="contact">
+                </div>
+                <div class="form-group">
+                    <label for="telephone" class="col-form-label">Telephone</label>
+                    <input  formControlName="telephone" class="form-control" id="telephone">
+                </div>
+                <div class="form-group">
+                    <label for="userLabel" class="col-form-label">User Label</label>
+                    <input  formControlName="userLabel" class="form-control" id="userLabel">
+                </div>
+                <div class="form-group">
+                    <label for="precise" class="col-form-label">Precise</label>
+                    <input type="number" formControlName="precise" class="form-control" id="precise">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="reset" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+        <button type="button" (click)="guardarLocationInformation()" class="btn btn-success mr-2"
+            (click)="modal.close('Close click')">
+            <i class="fa fa-save"></i>
+            Guardar
+        </button>
+    </div>
+</ng-template>
+

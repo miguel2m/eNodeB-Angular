@@ -12,9 +12,9 @@ export class Dchpsw {
         switch (this.parameterId) {
             case 'CREATE':
                 if(this.switchDchpsw)
-                    command += `SWITCH=${this.switchDchpsw},`;
+                    command += `SWITCH=${this.switchDchpsw.toUpperCase()},`;
                 if(this.vlanScansw)
-                    command += `VLANSCANSW=${this.vlanScansw}`;
+                    command += `VLANSCANSW=${this.vlanScansw.toUpperCase()}`;
                 command += ';'  
                 break;
             case 'DELETE':
