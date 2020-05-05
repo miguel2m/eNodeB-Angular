@@ -1,1 +1,109 @@
-<p>ne-maintenance-mode works!</p>
+
+<div class="card mb-4">
+    <div class="card-header"><i class="fas fa-table mr-1"></i>Table 5://NE maintenance mode </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Acciones</th>
+                        <th>Parameter ID</th>
+                        <th>Maintenance Mode</th>
+                        <th>Start Time of Status Setting</th>
+                        <th>End Time of Status Setting</th>
+                        <th>Maintenance Mode Setting Remark</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr *ngIf="object">
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+
+                                <button type="button" class="btn btn-primary"
+                                    (click)="openScrollableContent(longContent)" (click)="editar()">
+                                    Editar
+                                </button>
+
+                                <button (click)="eliminar()" type="button" class="btn btn-danger btn-sm">
+                                    Eliminar
+                                </button>
+                            </div>
+
+                        </td>
+                        <td>{{object.parameterId}}</td>
+                        <td>{{object.mntMode}}</td>
+                        <td>{{object.st}}</td>
+                        <td>{{object.et}}</td>
+                        <td>{{object.mmSetRemark}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <button *ngIf="!object" type="button" class="btn btn-primary"
+            (click)="openScrollableContent(longContent)">
+            Agregar
+        </button>
+        <p *ngIf="object" class="text-center"> <strong>{{object.Command}}</strong></p>
+
+
+    </div>
+</div>
+
+
+
+<ng-template #longContent let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="configDataModal">//NE maintenance mode</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-body">
+            <form [formGroup]="form">
+                <div class="form-group">
+                    <label for="parameterId" class="col-form-label">Parameter ID:</label>
+
+                    <select formControlName="parameterId" class="form-control">
+                        <option *ngFor="let item of parametersId" [value]="item">{{item}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="mntMode" class="col-form-label">Maintenance Mode</label>
+                    <input  formControlName="mntMode" class="form-control" id="mntMode">
+
+                </div>
+                <div class="form-group">
+                    <label for="st" class="col-form-label">Start Time of Status Setting</label>
+                    <input type="number" formControlName="st" class="form-control" id="st">
+                </div>
+
+                <div class="form-group">
+                    <label for="et" class="col-form-label">End Time of Status Setting</label>
+                    <input type="number" formControlName="et" class="form-control" id="et">
+                </div>
+
+                <div class="form-group">
+                    <label for="mmSetRemark" class="col-form-label">Maintenance Mode Setting Remark</label>
+                    <input  formControlName="mmSetRemark" class="form-control" id="mmSetRemark">
+                </div>
+
+                
+
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="reset" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+        <button type="button" (click)="guardar()" class="btn btn-success mr-2"
+            (click)="modal.close('Close click')">
+            <i class="fa fa-save"></i>
+            Guardar
+        </button>
+
+    </div>
+</ng-template>
