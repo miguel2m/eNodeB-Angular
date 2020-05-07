@@ -1,0 +1,206 @@
+
+<div class="card mb-4">
+    <div class="card-header"><i class="fas fa-table mr-1"></i>Table 6://Set Time Zone and DST Parameter (SET TZ) </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Acciones</th>
+                        <th>Parameter ID</th>
+                        <th>TIME ZONE</th>
+                        <th>TIME DIFFERENCE</th>
+                        <th>DST Tag Information</th>
+                        <th>DST Start Mode</th>
+                        <th>DST Start Month</th>
+                        <th>DST Start Day</th>
+                        <th>DST Start Week Sequence</th>
+                        <th>DST Start Weekday</th>
+                        <th>DST Start Time</th>
+                        <th>DST End Mode</th>
+                        <th>DST End Month</th>
+                        <th>DST End Day</th>
+                        <th>DST End Week Sequence</th>
+                        <th>DST End Weekday</th>
+                        <th>DST End Time</th>
+                        <th>DST Offset</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr *ngIf="object">
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+
+                                <button type="button" class="btn btn-primary"
+                                    (click)="openScrollableContent(longContent)" (click)="editar()">
+                                    Editar
+                                </button>
+
+                                <button (click)="eliminar()" type="button" class="btn btn-danger btn-sm">
+                                    Eliminar
+                                </button>
+                            </div>
+
+                        </td>
+                        
+                                                                
+                         <td>{{object.parameterId}}</td>
+                         <td>{{object.zonet   }}</td>
+                         <td>{{object.timediff   }}</td>
+                         <td>{{object.dst        }}</td>
+                         <td>{{object.sm         }}</td>
+                         <td>{{object.smonth     }}</td>
+                         <td>{{object.sday       }}</td>
+                         <td>{{object.swseq      }}</td>
+                         <td>{{object.sweek      }}</td>
+                         <td>{{object.st         }}</td>
+                         <td>{{object.em         }}</td>
+                         <td>{{object.emonth     }}</td>
+                         <td>{{object.eday       }}</td>
+                         <td>{{object.ewseq      }}</td>
+                         <td>{{object.eweek      }}</td>
+                         <td>{{object.et         }}</td>
+                         <td>{{object.to         }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <button *ngIf="!object" type="button" class="btn btn-primary"
+            (click)="openScrollableContent(longContent)">
+            Agregar
+        </button>
+        <p *ngIf="object" class="text-center"> <strong>{{object.Command}}</strong></p>
+
+
+    </div>
+</div>
+
+
+
+<ng-template #longContent let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="configDataModal">Table 6://Set Time Zone and DST Parameter (SET TZ) </h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-body">
+            <form [formGroup]="form">
+                <div class="form-group">
+                    <label for="parameterId" class="col-form-label">Parameter ID:</label>
+
+                    <select formControlName="parameterId" class="form-control">
+                        <option *ngFor="let item of parametersId" [value]="item">{{item}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="zonet" class="col-form-label">Time Zone</label>
+                    <input formControlName="zonet" class="form-control" id="zonet">
+
+                </div>
+                <div class="form-group">
+                    <label for="timediff" class="col-form-label">Time Difference</label>
+                    <input formControlName="timediff" class="form-control" id="timediff">
+
+                </div>
+                <div class="form-group">
+                    <label for="dst" class="col-form-label">DST Tag Information</label>
+                    <input formControlName="dst" class="form-control" id="dst">
+                </div>
+                <div class="form-group">
+                    <label for="sm" class="col-form-label">DST Start Mode</label>
+                    <input  formControlName="sm" class="form-control" id="sm">
+                </div>
+
+                <div class="form-group">
+                    <label for="smonth" class="col-form-label">DST Start Month
+                    </label>
+                    <input  formControlName="smonth" class="form-control" id="smonth">
+                </div>
+
+                <div class="form-group">
+                    <label for="sday" class="col-form-label">DST Start Day
+                    </label>
+                    <input  formControlName="sday" class="form-control" id="sday">
+                </div>
+
+                <div class="form-group">
+                    <label for="swseq" class="col-form-label">DST Start  Week Sequence
+                    </label>
+                    <input  formControlName="swseq" class="form-control" id="swseq">
+                </div>
+                
+                <div class="form-group">
+                    <label for="sweek" class="col-form-label">DST Start  Weekday 
+                    </label>
+                    <input  formControlName="sweek" class="form-control" id="sweek">
+                </div>
+
+                <div class="form-group">
+                    <label for="st" class="col-form-label">DST Start  Time 
+                    </label>
+                    <input  formControlName="st" class="form-control" id="st">
+                </div>
+
+                <div class="form-group">
+                    <label for="em" class="col-form-label">DST End Mode</label>
+                    <input  formControlName="em" class="form-control" id="em">
+                </div>
+
+                <div class="form-group">
+                    <label for="emonth" class="col-form-label">DST End Month
+                    </label>
+                    <input  formControlName="emonth" class="form-control" id="emonth">
+                </div>
+
+                <div class="form-group">
+                    <label for="eday" class="col-form-label">DST End Day
+                    </label>
+                    <input  formControlName="eday" class="form-control" id="eday">
+                </div>
+
+                <div class="form-group">
+                    <label for="ewseq" class="col-form-label">DST End  Week Sequence
+                    </label>
+                    <input  formControlName="ewseq" class="form-control" id="ewseq">
+                </div>
+                
+                <div class="form-group">
+                    <label for="eweek" class="col-form-label">DST End  Weekday 
+                    </label>
+                    <input  formControlName="eweek" class="form-control" id="eweek">
+                </div>
+
+                <div class="form-group">
+                    <label for="et" class="col-form-label">DST End  Time 
+                    </label>
+                    <input  formControlName="et" class="form-control" id="et">
+                </div>
+
+                <div class="form-group">
+                    <label for="to" class="col-form-label">DST OFFSET 
+                    </label>
+                    <input  formControlName="to" class="form-control" id="to">
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="reset" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+        <button type="button" (click)="guardar()" class="btn btn-success mr-2"
+            (click)="modal.close('Close click')">
+            <i class="fa fa-save"></i>
+            Guardar
+        </button>
+
+    </div>
+</ng-template>
+
+
+

@@ -40,12 +40,12 @@ export class SetNodeConfigComponent implements OnInit, OnDestroy {
     });
     this.setNodeConfigForm = this.fb.group({
       parameterId:  new FormControl(null),
-      puductType: ['', ],
-      userLabel: ['', ],
-      nermVersion: ['', ],
-      nodeId: ['', ],
+      puductType: [],
+      userLabel: [],
+      nermVersion: [],
+      nodeId: [],
       nodeName: [this.neName, ],
-      workingMode: ['', ]
+      workingMode: []
     });
     this.setNodeConfigForm.controls['parameterId'].setValue('REFERENCE', {onlySelf: true});
     if(this.setNodeConfigService.cargarSetNodeConfig()){

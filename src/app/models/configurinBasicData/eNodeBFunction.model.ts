@@ -6,8 +6,8 @@ export class EnodebFuntion {
         public id:number,
         public parameterId:string,
         public eNodeBFunctionName:string,
-        public applicationRef:string,
-        public enodebId:string,
+        public applicationRef:number,
+        public enodebId:number,
         public userLabel:string
     ) { }
 
@@ -17,9 +17,9 @@ export class EnodebFuntion {
             case 'CREATE':
                 if(this.eNodeBFunctionName)
                     command += `eNodeBFunctionName="${this.eNodeBFunctionName.toUpperCase()}",`;
-                if(this.applicationRef)
+                if(this.applicationRef  !== null)
                     command += `ApplicationRef=${this.applicationRef},`;
-                if(this.enodebId)
+                if(this.enodebId  !== null)
                     command += `eNodeBId=${this.enodebId},`;
                 if(this.userLabel)
                     command += `USERLABEL="${this.userLabel.toUpperCase()}"`;

@@ -1,0 +1,115 @@
+
+<div class="card mb-4">
+    <div class="card-header"><i class="fas fa-table mr-1"></i>Table 9://Set Master NTP Server (SET MASTERNTPS)
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Acciones</th>
+                        <th>Parameter ID</th>
+                        <th>IP mode     </th>    
+                        <th>IPv4 Address of NTP Server
+                        </th>    
+                        <th>IPv6 Address of NTP Server
+                        </th>    
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr *ngIf="object">
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+
+                                <button type="button" class="btn btn-primary"
+                                    (click)="openScrollableContent(longContent)" (click)="editar()">
+                                    Editar
+                                </button>
+
+                                <button (click)="eliminar()" type="button" class="btn btn-danger btn-sm">
+                                    Eliminar
+                                </button>
+                            </div>
+
+                        </td>
+                        <td>{{object.parameterId  }}</td>
+                        <td>{{object.mode          }}</td> 
+                        <td>{{object.ip          }}</td> 
+                        <td>{{object.ipv6           }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <button *ngIf="!object" type="button" class="btn btn-primary"
+            (click)="openScrollableContent(longContent)">
+            Agregar
+        </button>
+        <p *ngIf="object" class="text-center"> <strong>{{object.Command}}</strong></p>
+
+
+    </div>
+</div>
+
+
+
+<ng-template #longContent let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="configDataModal">Table 9://Set Master NTP Server (SET MASTERNTPS) </h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-body">
+            <form [formGroup]="form">
+                <div class="form-group">
+                    <label for="parameterId" class="col-form-label">Parameter ID:</label>
+
+                    <select formControlName="parameterId" class="form-control">
+                        <option *ngFor="let item of parametersId" [value]="item">{{item}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="mode" class="col-form-label">IP MODE</label>
+                    <input  formControlName="mode" class="form-control" id="mode">
+
+                </div>
+
+                <div class="form-group">
+                    <label for="ip" class="col-form-label">IPv4 Address of NTP Server
+                    </label>
+                    <input formControlName="ip" class="form-control" id="ip" [class.is-invalid]="ipValid">
+                    <small *ngIf="ipValid" class="text-danger">
+                        Ingrese IP valida
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label for="ipv6" class="col-form-label">IPv6 Address of NTP Server
+                    </label>
+                    <input formControlName="ipv6" class="form-control" id="ipv6">
+
+                </div>
+               
+
+                
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="reset" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+        <button type="button" (click)="guardar()" class="btn btn-success mr-2"
+            (click)="modal.close('Close click')"
+            [disabled]="form.invalid">
+            <i class="fa fa-save"></i>
+            Guardar
+        </button>
+
+    </div>
+</ng-template>
+
+

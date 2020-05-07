@@ -1,0 +1,188 @@
+<div class="card mb-4">
+    <div class="card-header"><i class="fas fa-table mr-1"></i>Table 4: //Add RRU Chain/Ring (ADD RRUCHAIN)</div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Acciones</th>
+                        <th>Parameter ID</th>
+                        <th>Chain No.</th>
+                        <th>Topo Type</th>
+                        <th>Backup Mode</th>
+                        <th>Access Type</th>
+                        <th>Head Cabinet No.</th>
+                        <th>Head Subrack No.</th>
+                        <th>Head Slot No.</th>
+                        <th>Head Port No.</th>
+                        <th>Tail Cabinet No.</th>
+                        <th>Tail Subrack No.</th>
+                        <th>Tail Slot No.</th>
+                        <th>Tail Port No.</th>
+                        <th>CPRI Line Rate</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let item of array ; let i=index">
+                         <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                               
+                                <!-- Button trigger modal  -->
+                                
+                                <button type="button" class="btn btn-primary"
+                                    (click)="openScrollableContent(content)"
+                                    (click)="editar(item.id)">
+                                    Editar
+                                </button> 
+                                <!-- Button trigger modal -->
+                                <button (click)="borrar(item.id)" type="button" class="btn btn-danger btn-sm">
+                                    Eliminar
+                                </button>
+
+                                <button type="button" class="btn btn-primary"
+                                
+                                    (click)="duplicar(item.id)">
+                                    Duplicar
+                                </button> 
+                            </div>
+
+                        </td>
+                        
+                        <td>{{item.parameterId}}</td>
+                        <td>{{item.rnc}}</td>                       
+                        <td>{{item.tt}}</td>
+                        <td>{{item.bm}}</td>
+
+                        <td>{{item.at}}</td>
+                        <td>{{item.hcn}}</td>                       
+                        <td>{{item.hsrn}}</td>
+                        <td>{{item.hsn}}</td>
+
+                        <td>{{item.hpn}}</td>
+                        <td>{{item.tcn}}</td>                       
+                        <td>{{item.tsrn}}</td>
+                        <td>{{item.tsn}}</td>
+
+                        <td>{{item.tpn}}</td>
+                        <td>{{item.cr}}</td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <br>
+        <!-- Button trigger modal -->
+        <button *ngIf="array.length < 3" type="button" class="btn btn-primary"
+            (click)="openScrollableContent(content)">
+            Agregar
+        </button>
+        <br>
+        <br>
+        <div *ngIf="array[0]" class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>MML Command</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let item of array">  
+                        <td>{{item.Command}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="content">Table 4: //Add RRU Chain/Ring</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-body">
+            <form [formGroup]="form">
+                <div class="form-group">
+                    <label for="parameterId" class="col-form-label">Parameter ID:</label>
+
+                    <select formControlName="parameterId" class="form-control">
+                        <option *ngFor="let item of parametersId" [value]="item">{{item}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="rnc" class="col-form-label">Chain No.</label>
+                    <input type="number" min="0" value="0" formControlName="rnc" class="form-control" id="rnc">
+
+                </div>
+                <div class="form-group">
+                    <label for="tt" class="col-form-label">Topo Type</label>
+                    <input  formControlName="tt" class="form-control" id="tt">
+
+                </div>
+                <div class="form-group">
+                    <label for="bm" class="col-form-label">Backup Mode</label>
+                    <input formControlName="bm" class="form-control" id="bm">
+                </div>
+                <div class="form-group">
+                    <label for="at" class="col-form-label">Access Type</label>
+                    <input  formControlName="at" class="form-control" id="at">
+                </div>
+                <div class="form-group">
+                    <label for="hcn" class="col-form-label">Head Cabinet No.</label>
+                    <input type="number" min="0" formControlName="hcn" class="form-control" id="hcn">
+                </div>
+                <div class="form-group">
+                    <label for="hsrn" class="col-form-label">Head Subrack No.</label>
+                    <input type="number" min="0" formControlName="hsrn" class="form-control" id="hsrn">
+                </div>
+                <div class="form-group">
+                    <label for="hsn" class="col-form-label">Head Slot No.</label>
+                    <input type="number" min="0" formControlName="hsn" class="form-control" id="hsn">
+                </div>
+                <div class="form-group">
+                    <label for="hpn" class="col-form-label">Head Port No.</label>
+                    <input type="number" min="0" formControlName="hpn" class="form-control" id="hpn">
+                </div>
+                <div class="form-group">
+                    <label for="tcn" class="col-form-label">Tail Cabinet No.</label>
+                    <input type="number" min="0" formControlName="tcn" class="form-control" id="tcn">
+                </div>
+                <div class="form-group">
+                    <label for="tsrn" class="col-form-label">Tail Subrack No.</label>
+                    <input type="number" min="0" formControlName="tsrn" class="form-control" id="tsrn">
+                </div>
+                <div class="form-group">
+                    <label for="tsn" class="col-form-label">Tail Slot No.</label>
+                    <input type="number" min="0" formControlName="tsn" class="form-control" id="tsn">
+                </div>
+                <div class="form-group">
+                    <label for="tpn" class="col-form-label">Tail Port No.</label>
+                    <input type="number" min="0" formControlName="tpn" class="form-control" id="tpn">
+                </div>
+
+                <div class="form-group">
+                    <label for="cr" class="col-form-label">CPRI Line Rate</label>
+                    <input formControlName="cr" class="form-control" id="cr">
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="reset" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+        <button type="button" (click)="guardar()" class="btn btn-success mr-2"
+            (click)="modal.close('Close click')">
+            <i class="fa fa-save"></i>
+            Guardar
+        </button>
+    </div>
+</ng-template>
+

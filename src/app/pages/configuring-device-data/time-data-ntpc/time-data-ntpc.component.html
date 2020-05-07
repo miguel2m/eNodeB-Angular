@@ -1,0 +1,181 @@
+<div class="card mb-4">
+    <div class="card-header"><i class="fas fa-table mr-1"></i>Table 8: //Add NTP Client (ADD NTPC)
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Acciones</th>
+                        <th>Parameter ID</th>
+                        <th>IP mode     </th>    
+                        <th>IPv4 Address of NTP Server
+                        </th>    
+                        <th>IPv6 Address of NTP Server
+                        </th>    
+                        <th>Port Number
+                        </th>    
+                        <th>Synchronization Period
+                        </th>    
+                        <th>Authentication Mode
+                        </th>    
+                        <th>Authentication Key
+                        </th>    
+                        <th>Authentication Key Index
+                        </th>    
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let item of array ; let i=index">
+                         <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                               
+                                <!-- Button trigger modal  -->
+                                
+                                <button type="button" class="btn btn-primary"
+                                    (click)="openScrollableContent(content)"
+                                    (click)="editar(item.id)">
+                                    Editar
+                                </button> 
+                                <!-- Button trigger modal -->
+                                <button (click)="borrar(item.id)" type="button" class="btn btn-danger btn-sm">
+                                    Eliminar
+                                </button>
+
+                                <button type="button" class="btn btn-primary"
+                                
+                                    (click)="duplicar(item.id)">
+                                    Duplicar
+                                </button> 
+                            </div>
+
+                        </td>
+                        <td>{{item.parameterId  }}</td>
+                        <td>{{item.mode          }}</td> 
+                        <td>{{item.ip          }}</td> 
+                        <td>{{item.ipv6           }}</td> 
+                        <td>{{item.port           }}</td> 
+                        <td>{{item.synccycle          }}</td> 
+                        <td>{{item.authmode           }}</td> 
+                        <td>{{item.key           }}</td> 
+                        <td>{{item.keyid           }}</td> 
+                        
+
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <br>
+        <!-- Button trigger modal -->
+        <button *ngIf="array.length < 2" type="button" class="btn btn-primary"
+            (click)="openScrollableContent(content)">
+            Agregar
+        </button>
+        <br>
+        <br>
+        <div *ngIf="array[0]" class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>MML Command</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr *ngFor="let item of array">  
+                        <td>{{item.Command}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="content">Table 8: //Add NTP Client (ADD NTPC)</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-body">
+            <form [formGroup]="form">
+                <div class="form-group">
+                    <label for="parameterId" class="col-form-label">Parameter ID:</label>
+
+                    <select formControlName="parameterId" class="form-control">
+                        <option *ngFor="let item of parametersId" [value]="item">{{item}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="mode" class="col-form-label">IP MODE</label>
+                    <input  formControlName="mode" class="form-control" id="mode">
+
+                </div>
+
+                <div class="form-group">
+                    <label for="ip" class="col-form-label">IPv4 Address of NTP Server
+                    </label>
+                    <input formControlName="ip" class="form-control" id="ip" [class.is-invalid]="ipValid">
+                    <small *ngIf="ipValid" class="text-danger">
+                        Ingrese IP valida
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label for="ipv6" class="col-form-label">IPv6 Address of NTP Server
+                    </label>
+                    <input formControlName="ipv6" class="form-control" id="ipv6">
+
+                </div>
+                
+                <div class="form-group">
+                    <label for="port" class="col-form-label">Port Number
+                    </label>
+                    <input type="number" formControlName="port" class="form-control" id="port">
+                </div>
+
+                <div class="form-group">
+                    <label for="synccycle" class="col-form-label">Synchronization Period
+                    </label>
+                    <input type="number" min="0" formControlName="synccycle" class="form-control" id="synccycle">
+                </div>
+
+                <div class="form-group">
+                    <label for="authmode" class="col-form-label">Authentication Mode
+                    </label>
+                    <input formControlName="authmode" class="form-control" id="authmode">
+                </div>
+
+                <div class="form-group">
+                    <label for="key" class="col-form-label">Authentication Key
+                    </label>
+                    <input formControlName="key" class="form-control" id="key">
+                </div>
+                <div class="form-group">
+                    <label for="keyid" class="col-form-label">Authentication Key Index
+                    </label>
+                    <input formControlName="keyid" class="form-control" id="keyid">
+                </div>
+                
+                
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="reset" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+        <button type="button" (click)="guardar()" class="btn btn-success mr-2"
+            (click)="modal.close('Close click')"
+            [disabled]="form.invalid">
+            <i class="fa fa-save"></i>
+            Guardar
+        </button>
+    </div>
+</ng-template>
+
+

@@ -35,9 +35,9 @@ export class OperatorTrackingAreaComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.group({
       parameterId:  new FormControl(null),
-      trackingAreaId: ['', ],
-      cnOperatorId: ['', ],
-      tac: ['', ]
+      trackingAreaId: [],
+      cnOperatorId: [],
+      tac: []
     });
     this.form.controls['parameterId'].setValue('REFERENCE', {onlySelf: true});
     if(this.operatorTrackingAreaService.cargar()){

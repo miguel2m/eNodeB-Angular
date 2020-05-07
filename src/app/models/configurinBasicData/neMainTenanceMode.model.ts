@@ -6,8 +6,8 @@ export class NeMaintenaceMode {
         public id:number,
         public parameterId:string,
         public mntMode:string,
-        public st:string,
-        public et:string,
+        public st:number,
+        public et:number,
         public mmSetRemark:string
     ) { }
 
@@ -17,9 +17,9 @@ export class NeMaintenaceMode {
             case 'CREATE':
                 if(this.mntMode)
                     command += `MNTMODE=${this.mntMode.toUpperCase()},`;
-                if(this.st)
+                if(this.st !== null)
                     command += `ST=${this.st},`;
-                if(this.et)
+                if(this.et !== null)
                     command += `ET=${this.et},`;
                 if(this.mmSetRemark)
                     command += `MMSETREMARK="${this.mmSetRemark.toUpperCase()}"`;

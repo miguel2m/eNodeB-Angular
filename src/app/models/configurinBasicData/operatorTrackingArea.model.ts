@@ -14,11 +14,11 @@ export class OperatorTrackingArea {
         let command = 'ADD CNOPERATORTA:';
         switch (this.parameterId) {
             case 'CREATE':
-                if(this.trackingAreaId)
+                if(this.trackingAreaId !== null)
                     command += `TrackingAreaId=${this.trackingAreaId},`;
-                if(this.cnOperatorId)
+                if(this.cnOperatorId !== null)
                     command += `CnOperatorId=${this.cnOperatorId},`;
-                if(this.tac)
+                if(this.tac !== null)
                     command += `Tac=${this.tac}`;        
                 command += ';'  
                 break;

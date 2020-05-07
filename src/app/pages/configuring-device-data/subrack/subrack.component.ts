@@ -3,60 +3,58 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../store/app.reducers';
 import * as actions from '../../../store/actions/index';
 
+import { SubrackService } from '../../../services/configuring-device-data/subrack.service';
 
-import { EnodebFuntion } from '../../../models/configurinBasicData/eNodeBFunction.model';
-import { EnodebFunctionService } from '../../../services/configBasicData/enodeb-function.service';
-import { SidebarCommand } from 'src/app/models/sidebarCommand/sidebarCommand.model';
-
+import { SidebarCommand } from '../../../models/sidebarCommand/sidebarCommand.model';
+import { Subrack } from '../../../models/configurin-device-data/subrack.model';
 
 @Component({
-  selector: 'app-enodeb-function',
-  templateUrl: './enodeb-function.component.html',
-  styles: [
-  ]
+  selector: 'app-subrack',
+  templateUrl: './subrack.component.html'
 })
-export class EnodebFunctionComponent implements OnInit {
+export class SubrackComponent implements OnInit {
   parametersId: string[] = ['REFERENCE', 'CREATE', 'DELETE'];
   editarForm: boolean = false;
   form: FormGroup;
-  object : EnodebFuntion;
+  object : Subrack;
   
   subscripcion: Subscription;
-  sidebarCommand:number = 40;
+  sidebarCommand:number = 65;
 
   constructor(private fb: FormBuilder,
     private store: Store<AppState>,
     private modalService: NgbModal,
-    private enodebFunctionService:EnodebFunctionService) { }
+    private subrackService:SubrackService) { }
 
   ngOnInit(): void {
 
     this.form = this.fb.group({
       parameterId:  new FormControl(null),
-      eNodeBFunctionName: [],
-      applicationRef: [],
-      enodebId: [],
-      userLabel: []
+      cn: [],
+      srn: [],
+      type: [],
+      desc: []
     });
     this.form.controls['parameterId'].setValue('REFERENCE', {onlySelf: true});
-    if(this.enodebFunctionService.cargar()){
+    if(this.subrackService.cargar()){
       const { id,
         parameterId,
-        eNodeBFunctionName,
-        applicationRef,
-        enodebId,
-        userLabel} =this.enodebFunctionService.cargar();
-      this.object = new EnodebFuntion(
+        cn,
+        srn,
+        type,
+        desc} =this.subrackService.cargar();
+      this.object = new Subrack(
         id,
         parameterId,
-        eNodeBFunctionName,
-        applicationRef,
-        enodebId,
-        userLabel);
+        cn,
+        srn,
+        type,
+        desc);
       
         this.store.dispatch(
           actions.editarSidebarCommand({
@@ -72,19 +70,18 @@ export class EnodebFunctionComponent implements OnInit {
   }
 
   editar() {
-    const { 
+    const { id,
       parameterId,
-      eNodeBFunctionName,
-      applicationRef,
-      enodebId,
-      userLabel} = this.object;
+      cn,
+      srn,
+      type,
+      desc} = this.object;
     this.form.reset({
-
-        parameterId,
-        eNodeBFunctionName,
-        applicationRef,
-        enodebId,
-        userLabel
+      parameterId,
+      cn,
+      srn,
+      type,
+      desc
     });
     this.form.controls['parameterId'].setValue(parameterId, {onlySelf: true});
     this.editarForm = true;
@@ -92,7 +89,7 @@ export class EnodebFunctionComponent implements OnInit {
 
   eliminar() {
     this.object = null;
-    this.enodebFunctionService.eliminar();
+    this.subrackService.eliminar();
     
     this.store.dispatch(
       actions.editarSidebarCommand({
@@ -117,20 +114,20 @@ export class EnodebFunctionComponent implements OnInit {
 
         const { 
           parameterId,
-          eNodeBFunctionName,
-          applicationRef,
-          enodebId,
-          userLabel} = this.form.value;
+          cn,
+          srn,
+          type,
+          desc} = this.form.value;
       
-      this.object = new EnodebFuntion(
+      this.object = new Subrack(
         id,
         parameterId,
-          eNodeBFunctionName,
-          applicationRef,
-          enodebId,
-          userLabel);
+        cn,
+        srn,
+        type,
+        desc);
 
-      this.enodebFunctionService.guardar(this.object);
+      this.subrackService.guardar(this.object);
       this.store.dispatch(
         actions.editarSidebarCommand({
           sidebarCommand: new SidebarCommand(this.sidebarCommand,this.object.Command)

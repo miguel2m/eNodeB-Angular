@@ -35,10 +35,10 @@ export class NeMaintenanceModeComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.group({
       parameterId:  new FormControl(null),
-      mntMode: ['', ],
-      st: ['', ],
-      et: ['', ],
-      mmSetRemark: ['', ]
+      mntMode: [],
+      st: [],
+      et: [],
+      mmSetRemark: []
     });
     this.form.controls['parameterId'].setValue('REFERENCE', {onlySelf: true});
     if(this.neMainTenanceModeService.cargar()){

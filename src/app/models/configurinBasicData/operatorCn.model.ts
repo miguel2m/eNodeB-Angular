@@ -16,15 +16,15 @@ export class OperatorCn {
         let command = 'ADD CNOPERATOR:';
         switch (this.parameterId) {
             case 'CREATE':
-                if(this.cnOperatorId)
+                if(this.cnOperatorId !== null)
                     command += `CnOperatorId=${this.cnOperatorId},`;
                 if(this.cnOperatorName)
                     command += `CnOperatorName="${this.cnOperatorName.toUpperCase()}",`;
                 if(this.cnOperatorType)
                     command += `CnOperatorType=${this.cnOperatorType.toUpperCase()},`;
-                if(this.mcc)
+                if(this.mcc !== null)
                     command += `Mcc="${this.mcc}",`;
-                if(this.mnc)
+                if(this.mnc !== null)
                     command += `Mnc="${this.mnc}"`;
                 command += ';'  
                 break;

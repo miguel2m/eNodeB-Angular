@@ -15,6 +15,7 @@ import { IpNodebRelatedComponent } from './initiallyConfig/ip-nodeb-related/ip-n
 import { RadioParametersComponent } from './initiallyConfig/radio-parameters/radio-parameters.component';
 import { PagesComponent } from './pages.component';
 import { DhcpswComponent } from './removeDefaultConfigData/dhcpsw.component';
+import { ConfiguringDeviceDataModule } from './configuring-device-data/configuring-device-data.module';
 
 
 
@@ -33,7 +34,8 @@ import { DhcpswComponent } from './removeDefaultConfigData/dhcpsw.component';
     AppRoutingModule,
     ReactiveFormsModule,
     NgbModule,
-    ConfigurinBasicDataModule
+    ConfigurinBasicDataModule,
+    ConfiguringDeviceDataModule
   ],
   exports:[
     PagesComponent,

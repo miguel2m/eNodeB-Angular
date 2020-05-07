@@ -1,0 +1,109 @@
+
+<div class="card mb-4">
+    <div class="card-header"><i class="fas fa-table mr-1"></i>Table 2://Add Subrack (ADD SUBRACK) </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Acciones</th>
+                        <th>Parameter ID</th>
+                        <th>Cabinet No.</th>
+                        <th>Subrack No.</th>
+                        <th>Subrack Type</th>
+                        <th>Subrack Description</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr *ngIf="object">
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+
+                                <button type="button" class="btn btn-primary"
+                                    (click)="openScrollableContent(longContent)" (click)="editar()">
+                                    Editar
+                                </button>
+
+                                <button (click)="eliminar()" type="button" class="btn btn-danger btn-sm">
+                                    Eliminar
+                                </button>
+                            </div>
+
+                        </td>
+                        <td>{{object.parameterId}}</td>
+                        <td>{{object.cn}}</td>
+                        <td>{{object.srn}}</td>
+                        <td>{{object.type}}</td>
+                        <td>{{object.desc}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <button *ngIf="!object" type="button" class="btn btn-primary"
+            (click)="openScrollableContent(longContent)">
+            Agregar
+        </button>
+        <p *ngIf="object" class="text-center"> <strong>{{object.Command}}</strong></p>
+
+
+    </div>
+</div>
+
+
+
+<ng-template #longContent let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="configDataModal">Table 2://Add Subrack (ADD SUBRACK) </h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-body">
+            <form [formGroup]="form">
+                <div class="form-group">
+                    <label for="parameterId" class="col-form-label">Parameter ID:</label>
+
+                    <select formControlName="parameterId" class="form-control">
+                        <option *ngFor="let item of parametersId" [value]="item">{{item}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cn" class="col-form-label">Cabinet No.</label>
+                    <input type="number"  formControlName="cn" class="form-control" id="cn">
+
+                </div>
+                <div class="form-group">
+                    <label for="srn" class="col-form-label">Subrack No.</label>
+                    <input type="number" formControlName="srn" class="form-control" id="srn">
+                </div>
+                <div class="form-group">
+                    <label for="type" class="col-form-label">Subrack Type</label>
+                    <input  formControlName="type" class="form-control" id="type">
+                </div>
+
+                <div class="form-group">
+                    <label for="desc" class="col-form-label">Subrack Description</label>
+                    <input  formControlName="desc" class="form-control" id="desc">
+                </div>
+
+                
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="reset" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+        <button type="button" (click)="guardar()" class="btn btn-success mr-2"
+            (click)="modal.close('Close click')">
+            <i class="fa fa-save"></i>
+            Guardar
+        </button>
+
+    </div>
+</ng-template>
+
+

@@ -23,9 +23,9 @@ export class SetNodeConfig {
                     command += `"${this.userLabel.toUpperCase()}",`;
                 if(this.nermVersion)
                     command += `"${this.nermVersion.toUpperCase()}",`;
-                if(this.nodeId)
-                    command += `"${this.nodeId.toUpperCase()}",`;
-                if(this.nodeName)
+                if(this.nodeId !== null)
+                    command += `"${this.nodeId}",`;
+                if(this.nodeName )
                     command += `"${this.nodeName.toUpperCase()}",`;
                 if(this.workingMode)
                     command += `"${this.workingMode.toUpperCase()}"`;    

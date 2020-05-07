@@ -35,11 +35,11 @@ export class OperatorCnComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.group({
       parameterId:  new FormControl(null),
-      cnOperatorId: ['', ],
-      cnOperatorName: ['', ],
-      cnOperatorType: ['', ],
-      mcc: ['', ],
-      mnc: ['', ]
+      cnOperatorId: [],
+      cnOperatorName: [],
+      cnOperatorType: [],
+      mcc: [],
+      mnc: []
     });
     this.form.controls['parameterId'].setValue('REFERENCE', {onlySelf: true});
     if(this.operatorCnService.cargar()){
